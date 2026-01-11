@@ -1,0 +1,36 @@
+<wxs module="utils">
+var formatId = function(id) {
+  if (!id) return ''
+  var idStr = id.toString()
+  while (idStr.length < 4) {
+    idStr = '0' + idStr
+  }
+  return '#' + idStr
+}
+module.exports.formatId = formatId
+</wxs>
+
+<view class="card" bindtap="onTap" hover-class="card-hover">
+  <view class="image-wrapper">
+    <image 
+      class="pokemon-img" 
+      src="{{data.imageUrl}}" 
+      mode="aspectFit" 
+      lazy-load 
+    />
+  </view>
+  
+  <view class="info">
+    <view class="header">
+      <text class="id">{{utils.formatId(data.id)}}</text>
+    </view>
+    
+    <text class="name">{{data.nameZh}}</text>
+    
+    <view class="types">
+      <block wx:for="{{data.types}}" wx:key="*this">
+        <type-badge type="{{item}}" size="small" />
+      </block>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,39 @@
+/** app.wxss **/
+/** 全局样式与 CSS 变量 **/
+
+page {
+  /* Design Tokens from UI Spec */
+  
+  /* Colors */
+  --color-primary: #E3350D;      /* 宝可梦红 */
+  --color-secondary: #3B4CCA;    /* 经典蓝 */
+  --color-accent: #FFCC00;       /* 皮卡丘黄 */
+  --color-bg: #F5F7FA;           /* 全局淡灰背景 */
+  --color-surface: #FFFFFF;      /* 白色卡片背景 */
+  
+  /* Text */
+  --text-main: #1F1F1F;          /* 主标题 */
+  --text-body: #666666;          /* 正文 */
+  --text-sub: #999999;           /* 辅助信息 */
+  
+  /* Layout */
+  --spacing-page: 32rpx;
+  --spacing-card-gutter: 20rpx;
+  --radius-normal: 16rpx;
+  --radius-large: 32rpx;
+  
+  background-color: var(--color-bg);
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica,
+    Segoe UI, Arial, Roboto, 'PingFang SC', 'miui', 'Hiragino Sans GB', 'Microsoft Yahei',
+    sans-serif;
+}
+
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 200rpx 0;
+  box-sizing: border-box;
+}

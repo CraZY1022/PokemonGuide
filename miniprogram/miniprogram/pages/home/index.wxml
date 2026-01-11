@@ -1,0 +1,28 @@
+<view class="home-container">
+  <!-- Sticky Search Bar -->
+  <view class="header-section">
+    <search-bar 
+      bind:search="onSearch" 
+      bind:filter="onFilter"
+    />
+  </view>
+
+  <!-- Pokemon List Grid -->
+  <view class="list-container">
+    <block wx:for="{{pokemonList}}" wx:key="id">
+      <view class="grid-item">
+        <pokemon-card data="{{item}}" />
+      </view>
+    </block>
+  </view>
+
+  <!-- Empty State -->
+  <view class="empty-state" wx:if="{{!loading && pokemonList.length === 0}}">
+    <text>暂无发现宝可梦</text>
+  </view>
+
+  <!-- Loading State -->
+  <view class="loading-state" wx:if="{{loading}}">
+    <text>加载中...</text>
+  </view>
+</view>

@@ -1,0 +1,6 @@
+<view 
+  class="badge {{size}}" 
+  style="background-color: {{bgColor}};"
+>
+  <text class="text">{{typeName}}</text>
+</view>

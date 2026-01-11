@@ -1,0 +1,112 @@
+page {
+  background-color: #F5F7FA;
+}
+
+.container {
+  padding: 32rpx;
+}
+
+.profile-header {
+  background: #FFFFFF;
+  border-radius: var(--radius-large);
+  padding: 40rpx;
+  display: flex;
+  align-items: center;
+  margin-bottom: 32rpx;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.03);
+}
+
+.profile-header .avatar {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 50%;
+  background-color: #EEE;
+  margin-right: 32rpx;
+}
+
+.profile-header .avatar.guest {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #F0F0F0;
+}
+
+.profile-header .avatar.guest .guest-icon {
+  width: 60%;
+  height: 60%;
+  opacity: 0.5;
+}
+
+.profile-header .info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-header .info .nickname {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: var(--text-main);
+  margin-bottom: 8rpx;
+}
+
+.profile-header .info .uid,
+.profile-header .info .hint {
+  font-size: 24rpx;
+  color: var(--text-sub);
+}
+
+.menu-list {
+  background: #FFFFFF;
+  border-radius: var(--radius-normal);
+  overflow: hidden;
+  margin-bottom: 40rpx;
+}
+
+.menu-list .menu-item {
+  display: flex;
+  align-items: center;
+  padding: 32rpx;
+  background: #FFF;
+  border-bottom: 1px solid #F5F5F5;
+}
+
+.menu-list .menu-item:last-child {
+  border-bottom: none;
+}
+
+.menu-list .menu-item:active {
+  background-color: #FAFAFA;
+}
+
+.menu-list .menu-item .label {
+  flex: 1;
+  font-size: 30rpx;
+  color: var(--text-main);
+}
+
+.menu-list .menu-item .value {
+  font-size: 28rpx;
+  color: var(--text-sub);
+  margin-right: 16rpx;
+}
+
+.menu-list .menu-item .arrow {
+  width: 16rpx;
+  height: 16rpx;
+  border-top: 2px solid #CCC;
+  border-right: 2px solid #CCC;
+  transform: rotate(45deg);
+}
+
+.action-area .logout-btn {
+  background: #FFFFFF;
+  color: #FF4D4F;
+  font-size: 32rpx;
+  border-radius: var(--radius-normal);
+  font-weight: 500;
+}
+
+.action-area .logout-btn::after {
+  border: none;
+}

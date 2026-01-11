@@ -1,0 +1,6 @@
+{
+    "component": true,
+    "usingComponents": {
+        "type-badge": "../type-badge/type-badge"
+    }
+}

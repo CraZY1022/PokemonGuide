@@ -1,0 +1,32 @@
+.home-container {
+  min-height: 100vh;
+  background-color: var(--color-bg);
+  padding-bottom: 40rpx;
+}
+
+.header-section {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.list-container {
+  padding: 24rpx;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 20rpx;
+}
+
+.grid-item {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 4;
+}
+
+.empty-state,
+.loading-state {
+  padding: 100rpx 0;
+  text-align: center;
+  color: var(--text-sub);
+  font-size: 28rpx;
+}

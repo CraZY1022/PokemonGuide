@@ -1,0 +1,8 @@
+{
+    "usingComponents": {
+        "type-badge": "../../components/type-badge/type-badge"
+    },
+    "navigationBarTitleText": "详情",
+    "navigationBarBackgroundColor": "#F5F7FA",
+    "navigationBarTextStyle": "black"
+}

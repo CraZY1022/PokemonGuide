@@ -1,0 +1,25 @@
+<view class="search-container {{isFocused ? 'focused' : ''}}">
+  <view class="input-wrapper">
+    <icon type="search" size="14" color="#999" class="icon-search" />
+    <input 
+      class="input"
+      type="text"
+      confirm-type="search"
+      placeholder="{{placeholder}}"
+      placeholder-class="placeholder"
+      value="{{value}}"
+      bindinput="onInput"
+      bindfocus="onFocus"
+      bindblur="onBlur"
+      bindconfirm="onConfig"
+    />
+    <view class="icon-clear" bindtap="onClear" wx:if="{{value.length > 0}}">
+      <icon type="clear" size="14" color="#ccc" />
+    </view>
+  </view>
+  
+  <view class="filter-btn" bindtap="onFilterTap" hover-class="btn-hover">
+    <!-- Using a simple text/icon for filter temporarily. Real icon would be image -->
+    <text style="font-size: 24rpx; font-weight: bold;">筛选</text>
+  </view>
+</view>

@@ -1,0 +1,8 @@
+{
+    "usingComponents": {
+        "pokemon-card": "../../components/pokemon-card/pokemon-card",
+        "search-bar": "../../components/search-bar/search-bar"
+    },
+    "enablePullDownRefresh": true,
+    "onReachBottomDistance": 50
+}

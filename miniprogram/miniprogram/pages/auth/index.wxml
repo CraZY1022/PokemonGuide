@@ -1,0 +1,47 @@
+<view class="auth-container">
+  <view class="logo-area">
+    <image class="logo" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png" mode="aspectFit" />
+    <text class="app-name">宝可梦图鉴</text>
+  </view>
+
+  <view class="form-card">
+    <text class="title">{{isRegister ? '创建新账号' : '欢迎回来'}}</text>
+    
+    <view class="input-group">
+      <text class="label">用户名</text>
+      <input 
+        class="input" 
+        placeholder="请输入用户名" 
+        value="{{username}}" 
+        data-field="username"
+        bindinput="onInput"
+      />
+    </view>
+    
+    <view class="input-group">
+      <text class="label">密码</text>
+      <input 
+        class="input" 
+        type="password" 
+        placeholder="请输入密码" 
+        value="{{password}}" 
+        data-field="password"
+        bindinput="onInput"
+      />
+    </view>
+
+    <button 
+      class="submit-btn" 
+      bindtap="onSubmit" 
+      loading="{{loading}}"
+      disabled="{{loading}}"
+    >
+      {{isRegister ? '注册' : '登录'}}
+    </button>
+    
+    <view class="footer-action">
+      <text class="hint">{{isRegister ? '已有账号？' : '还没有账号？'}}</text>
+      <text class="link" bindtap="toggleMode">{{isRegister ? '去登录' : '去注册'}}</text>
+    </view>
+  </view>
+</view>

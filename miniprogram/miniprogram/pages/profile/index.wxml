@@ -1,0 +1,45 @@
+<view class="container">
+  <!-- Header Card -->
+  <view class="profile-header">
+    <block wx:if="{{isLoggedIn}}">
+      <image class="avatar" src="{{userInfo.avatarUrl}}" mode="aspectFill" />
+      <view class="info">
+        <text class="nickname">{{userInfo.username}}</text>
+        <text class="uid">UID: {{userInfo.userId}}</text>
+      </view>
+    </block>
+    
+    <block wx:else>
+      <view class="avatar guest">
+        <image class="guest-icon" src="../../assets/icons/profile.svg" />
+      </view> 
+      <view class="info" bindtap="onLoginTap">
+        <text class="nickname">未登录</text>
+        <text class="hint">点击登录/注册，开启图鉴之旅</text>
+      </view>
+      <view class="arrow-icon"></view> 
+    </block>
+  </view>
+
+  <!-- Menu List -->
+  <view class="menu-list">
+    <view class="menu-item">
+      <text class="label">我的收藏</text>
+      <text class="value">0</text> 
+      <!-- Placeholder for V2 functionality -->
+    </view>
+    <view class="menu-item">
+      <text class="label">浏览历史</text>
+      <view class="arrow"></view>
+    </view>
+    <view class="menu-item">
+      <text class="label">关于我们</text>
+      <view class="arrow"></view>
+    </view>
+  </view>
+
+  <!-- Logout Button -->
+  <view class="action-area" wx:if="{{isLoggedIn}}">
+    <button class="logout-btn" bindtap="onLogoutTap">退出登录</button>
+  </view>
+</view>

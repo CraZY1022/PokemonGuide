@@ -1,0 +1,68 @@
+<wxs module="utils">
+var formatId = function(id) {
+  if (!id) return ''
+  var idStr = id.toString()
+  while (idStr.length < 4) {
+    idStr = '0' + idStr
+  }
+  return '#' + idStr
+}
+module.exports.formatId = formatId
+</wxs>
+
+<view class="container" wx:if="{{pokemon}}">
+  <!-- Image Section -->
+  <view class="hero-section">
+    <image 
+      class="visual-img" 
+      src="{{isShiny ? pokemon.imageShiny : pokemon.imageUrl}}" 
+      mode="aspectFit" 
+    />
+    
+    <!-- Shiny Toggle -->
+    <view class="toggle-wrapper" bindtap="toggleShiny">
+      <view class="toggle-btn {{isShiny ? 'active' : ''}}">
+        <text class="shiny-icon">✨</text>
+        <text class="label">{{isShiny ? '闪光' : '普通'}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- Info Card -->
+  <view class="info-card">
+    <view class="header">
+      <view class="title-row">
+        <text class="id">{{utils.formatId(pokemon.id)}}</text>
+        <text class="name">{{pokemon.nameZh}}</text>
+      </view>
+      <text class="name-en">{{pokemon.nameEn}}</text>
+    </view>
+
+    <!-- Types -->
+    <view class="section">
+      <view class="types-row">
+        <block wx:for="{{pokemon.types}}" wx:key="*this">
+          <type-badge type="{{item}}" size="medium" />
+        </block>
+      </view>
+    </view>
+
+    <!-- Description -->
+    <view class="section desc-box">
+      <text class="section-title">图鉴介绍</text>
+      <text class="desc-text">{{pokemon.desc || '暂无介绍'}}</text>
+    </view>
+
+    <!-- Data/Gen -->
+    <view class="section meta-row">
+      <view class="meta-item">
+        <text class="label">世代</text>
+        <text class="value">第 {{pokemon.gen}} 世代</text>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class="loading" wx:else>
+  <text>加载中...</text>
+</view>

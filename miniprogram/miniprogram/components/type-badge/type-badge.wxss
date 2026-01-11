@@ -1,0 +1,34 @@
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8rpx;
+  padding: 4rpx 12rpx;
+  margin-right: 8rpx;
+}
+
+.badge.small {
+  height: 32rpx;
+  padding: 2rpx 8rpx;
+}
+
+.badge.small .text {
+  font-size: 20rpx;
+}
+
+.badge.medium {
+  height: 48rpx;
+  padding: 4rpx 16rpx;
+  border-radius: 24rpx;
+}
+
+.badge.medium .text {
+  font-size: 24rpx;
+}
+
+.badge .text {
+  color: #FFFFFF;
+  line-height: 1;
+  font-weight: 500;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
