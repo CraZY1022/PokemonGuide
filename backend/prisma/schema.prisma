@@ -1,0 +1,37 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id            Int      @id @default(autoincrement())
+  username      String   @unique
+  password_hash String
+  created_at    DateTime @default(now())
+  updated_at    DateTime @updatedAt
+
+  @@map("users")
+}
+
+model Pokemon {
+  id           Int      @id // National Pokedex Number, manually set
+  name_zh      String
+  name_en      String
+  gen          Int
+  types        String[]
+  image_normal String?
+  image_shiny  String?
+  
+  created_at   DateTime @default(now())
+  updated_at   DateTime @updatedAt
+
+  @@index([gen])
+  @@index([name_zh])
+  @@map("pokemon")
+}
