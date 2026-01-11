@@ -5,58 +5,83 @@ Component({
     data: {
         pokemonList: [],
         loading: false,
-        query: ''
+        query: '',
+        page: 1,
+        hasMore: true,
+        refresherTriggered: false
     },
     methods: {
         onLoad() {
             this.loadData();
         },
-        loadData() {
+        loadData(loadMore = false) {
+            console.log(`[Home] loadData called. loadMore=${loadMore}, hasMore=${this.data.hasMore}, loading=${this.data.loading}`);
+            if (this.data.loading)
+                return;
+            if (loadMore && !this.data.hasMore)
+                return;
             this.setData({ loading: true });
+            const page = loadMore ? this.data.page + 1 : 1;
             const { query } = this.data;
-            const params = {};
+            const params = {
+                page: page,
+                limit: 20
+            };
             if (query) {
                 params.search = query;
             }
             pokemon_1.pokemonService.getPokemonList(params)
                 .then(res => {
-                // Map API response to Frontend Model
-                const list = res.data.map((item) => ({
+                const newList = res.data.map((item) => ({
                     id: item.id,
                     nameZh: item.name_zh,
                     nameEn: item.name_en,
                     types: item.types,
-                    // Note: PokemonType enum values were not checked thoroughly, assuming backend returns compatible string lines "grass"
-                    // If enum is capitalized, might need mapper. Let's check matching later.
                     imageUrl: item.image_normal,
                     gen: item.gen
                 }));
+                const { meta } = res;
+                console.log('[Home] API Response Meta:', meta);
+                const hasMore = meta.page < meta.totalPages;
                 this.setData({
-                    pokemonList: list,
-                    loading: false
+                    pokemonList: loadMore ? this.data.pokemonList.concat(newList) : newList,
+                    loading: false,
+                    page: page,
+                    hasMore: hasMore,
+                    refresherTriggered: false // Stop refresher animation
                 });
-                wx.stopPullDownRefresh();
             })
-                .catch(() => {
-                this.setData({ loading: false });
-                wx.stopPullDownRefresh();
+                .catch(err => {
+                console.error('[Home] Load failed', err);
+                this.setData({
+                    loading: false,
+                    refresherTriggered: false
+                });
             });
         },
         onSearch(e) {
             this.setData({ query: e.detail }, () => {
-                this.loadData();
+                this.loadData(false);
             });
         },
+        // Handlers for scroll-view
+        onRefresherRefresh() {
+            console.log('[Home] onRefresherRefresh');
+            this.setData({ refresherTriggered: true });
+            this.loadData(false);
+        },
+        onScrollToLower() {
+            console.log('[Home] onScrollToLower');
+            this.loadData(true);
+        },
+        // Legacy handlers (can remove/keep empty)
+        onPullDownRefresh() { },
+        onReachBottom() { },
         onInput(e) {
             // Optional: Real-time search or just update query
-            // For now, let's just trigger on 'search' (confirm) or we can debounce here.
-            // The search-bar component triggers 'input' on typing.
         },
         onFilter() {
             wx.showToast({ title: '筛选功能开发中', icon: 'none' });
-        },
-        onPullDownRefresh() {
-            this.loadData();
         }
     }
 });

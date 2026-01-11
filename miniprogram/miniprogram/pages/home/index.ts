@@ -7,7 +7,8 @@ Component({
         loading: false,
         query: '',
         page: 1,
-        hasMore: true
+        hasMore: true,
+        refresherTriggered: false
     },
 
     methods: {
@@ -16,6 +17,7 @@ Component({
         },
 
         loadData(loadMore: boolean = false) {
+            console.log(`[Home] loadData called. loadMore=${loadMore}, hasMore=${this.data.hasMore}, loading=${this.data.loading}`)
             if (this.data.loading) return
             if (loadMore && !this.data.hasMore) return
 
@@ -44,19 +46,23 @@ Component({
                     }))
 
                     const { meta } = res
+                    console.log('[Home] API Response Meta:', meta)
                     const hasMore = meta.page < meta.totalPages
 
                     this.setData({
                         pokemonList: loadMore ? this.data.pokemonList.concat(newList) : newList,
                         loading: false,
                         page: page,
-                        hasMore: hasMore
+                        hasMore: hasMore,
+                        refresherTriggered: false // Stop refresher animation
                     })
-                    wx.stopPullDownRefresh()
                 })
-                .catch(() => {
-                    this.setData({ loading: false })
-                    wx.stopPullDownRefresh()
+                .catch(err => {
+                    console.error('[Home] Load failed', err)
+                    this.setData({
+                        loading: false,
+                        refresherTriggered: false
+                    })
                 })
         },
 
@@ -66,20 +72,28 @@ Component({
             })
         },
 
+        // Handlers for scroll-view
+        onRefresherRefresh() {
+            console.log('[Home] onRefresherRefresh')
+            this.setData({ refresherTriggered: true })
+            this.loadData(false)
+        },
+
+        onScrollToLower() {
+            console.log('[Home] onScrollToLower')
+            this.loadData(true)
+        },
+
+        // Legacy handlers (can remove/keep empty)
+        onPullDownRefresh() { },
+        onReachBottom() { },
+
         onInput(e: any) {
             // Optional: Real-time search or just update query
         },
 
         onFilter() {
             wx.showToast({ title: '筛选功能开发中', icon: 'none' })
-        },
-
-        onPullDownRefresh() {
-            this.loadData(false)
-        },
-
-        onReachBottom() {
-            this.loadData(true)
         }
     }
 })

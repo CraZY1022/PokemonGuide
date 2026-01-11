@@ -1,4 +1,13 @@
-<view class="home-container">
+<scroll-view 
+  class="home-container" 
+  scroll-y 
+  refresher-enabled
+  refresher-triggered="{{refresherTriggered}}"
+  bindrefresherrefresh="onRefresherRefresh"
+  bindscrolltolower="onScrollToLower"
+  enhanced
+  show-scrollbar="{{false}}"
+>
   <!-- Sticky Search Bar -->
   <view class="header-section">
     <search-bar 
@@ -25,4 +34,9 @@
   <view class="loading-state" wx:if="{{loading}}">
     <text>加载中...</text>
   </view>
-</view>
+  
+  <!-- Footer for No More Data -->
+  <view class="loading-state" wx:if="{{!hasMore && pokemonList.length > 0}}">
+    <text>已加载全部</text>
+  </view>
+</scroll-view>

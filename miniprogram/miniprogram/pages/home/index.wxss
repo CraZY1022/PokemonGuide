@@ -1,7 +1,7 @@
 .home-container {
-  min-height: 100vh;
+  height: 100vh;
   background-color: var(--color-bg);
-  padding-bottom: 40rpx;
+  box-sizing: border-box;
 }
 
 .header-section {

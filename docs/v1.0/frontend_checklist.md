@@ -3,6 +3,14 @@
 本文档基于 `1.0版本PRD.md` 及 UI 设计建议生成，旨在明确前端开发路径、规范与技术选型。
 
 ---
+> **Status Tracker**:
+> - [x] Page Structure & Routing
+> - [x] Component Implementation (PokemonCard, TypeBadge, SearchBar)
+> - [x] Native TS + SCSS Setup
+> - [x] Backend API Integration (Axios wrapper style)
+> - [x] Infinite Scroll (Custom ScrollView implementation)
+
+---
 
 ## 1. 页面结构与路由规划 (Page Structure & Routing)
 

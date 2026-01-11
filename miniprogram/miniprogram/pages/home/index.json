@@ -3,6 +3,6 @@
         "pokemon-card": "../../components/pokemon-card/pokemon-card",
         "search-bar": "../../components/search-bar/search-bar"
     },
-    "enablePullDownRefresh": true,
+    "enablePullDownRefresh": false,
     "onReachBottomDistance": 50
 }
