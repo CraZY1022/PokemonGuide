@@ -1,0 +1,30 @@
+<svg width="375" height="812" viewBox="0 375 812" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="375" height="812" fill="white"/>
+  
+  <!-- Logo Area -->
+  <circle cx="187.5" cy="180" r="40" stroke="#E3350D" stroke-width="4"/>
+  <path d="M147.5 180H227.5" stroke="#E3350D" stroke-width="4"/>
+  <circle cx="187.5" cy="180" r="12" fill="white" stroke="#E3350D" stroke-width="4"/>
+  <text x="187.5" y="250" fill="#333" font-family="PingFang SC" font-weight="bold" font-size="24" text-anchor="middle">欢迎回来</text>
+  
+  <!-- Inputs -->
+  <g transform="translate(48, 300)">
+      <text x="0" y="0" fill="#666" font-size="14">账号</text>
+      <rect x="0" y="10" width="279" height="44" rx="4" stroke="#DDD" fill="#FAFAFA"/>
+      <text x="12" y="37" fill="#CCC" font-size="14">请输入用户名</text>
+  </g>
+  
+  <g transform="translate(48, 380)">
+      <text x="0" y="0" fill="#666" font-size="14">密码</text>
+      <rect x="0" y="10" width="279" height="44" rx="4" stroke="#DDD" fill="#FAFAFA"/>
+      <text x="12" y="37" fill="#CCC" font-size="14">请输入密码</text>
+  </g>
+  
+  <!-- Primary Button -->
+  <rect x="48" y="480" width="279" height="48" rx="24" fill="#E3350D" filter="drop-shadow(0px 4px 10px rgba(227, 53, 13, 0.3))"/>
+  <text x="187.5" y="510" fill="white" font-family="PingFang SC" font-weight="600" font-size="16" text-anchor="middle">登录</text>
+  
+  <!-- Secondary Action -->
+  <text x="187.5" y="560" fill="#999" font-size="14" text-anchor="middle">还没有账号？<tspan fill="#3B4CCA">立即注册</tspan></text>
+
+</svg>
