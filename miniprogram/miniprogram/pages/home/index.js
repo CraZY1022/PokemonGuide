@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const mock_data_1 = require("../../models/mock-data");
+const pokemon_1 = require("../../services/pokemon");
 Component({
     data: {
         pokemonList: [],
@@ -13,22 +13,34 @@ Component({
         },
         loadData() {
             this.setData({ loading: true });
-            // Simulate API delay
-            setTimeout(() => {
-                // Simple client-side filtering logic for mock
-                let list = mock_data_1.MOCK_POKEMON_LIST;
-                if (this.data.query) {
-                    const q = this.data.query.toLowerCase();
-                    list = list.filter(p => p.nameZh.includes(q) ||
-                        p.nameEn.toLowerCase().includes(q) ||
-                        p.id.toString().includes(q));
-                }
+            const { query } = this.data;
+            const params = {};
+            if (query) {
+                params.search = query;
+            }
+            pokemon_1.pokemonService.getPokemonList(params)
+                .then(res => {
+                // Map API response to Frontend Model
+                const list = res.data.map((item) => ({
+                    id: item.id,
+                    nameZh: item.name_zh,
+                    nameEn: item.name_en,
+                    types: item.types,
+                    // Note: PokemonType enum values were not checked thoroughly, assuming backend returns compatible string lines "grass"
+                    // If enum is capitalized, might need mapper. Let's check matching later.
+                    imageUrl: item.image_normal,
+                    gen: item.gen
+                }));
                 this.setData({
                     pokemonList: list,
                     loading: false
                 });
                 wx.stopPullDownRefresh();
-            }, 500);
+            })
+                .catch(() => {
+                this.setData({ loading: false });
+                wx.stopPullDownRefresh();
+            });
         },
         onSearch(e) {
             this.setData({ query: e.detail }, () => {

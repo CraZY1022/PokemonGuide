@@ -11,7 +11,7 @@
     
     <block wx:else>
       <view class="avatar guest">
-        <image class="guest-icon" src="../../assets/icons/profile.svg" />
+        <image class="guest-icon" src="../../assets/icons/profile.png" />
       </view> 
       <view class="info" bindtap="onLoginTap">
         <text class="nickname">未登录</text>

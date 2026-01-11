@@ -1,4 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const auth_1 = require("../../services/auth");
 Component({
     data: {
         userInfo: null,
@@ -9,11 +11,22 @@ Component({
             this.checkLoginStatus();
         },
         checkLoginStatus() {
+            const token = wx.getStorageSync('token');
             const userInfo = wx.getStorageSync('userInfo');
-            if (userInfo) {
+            if (token && userInfo) {
                 this.setData({
                     userInfo: userInfo,
                     isLoggedIn: true
+                });
+                // Silent refresh of profile
+                auth_1.authService.getProfile().then(userProfile => {
+                    const newUserInfo = Object.assign(Object.assign({}, userInfo), userProfile);
+                    wx.setStorageSync('userInfo', newUserInfo);
+                    this.setData({ userInfo: newUserInfo });
+                }).catch(() => {
+                    // Token likely expired
+                    // request.ts handles 401 logout, but here we can just update UI
+                    // this.setData({ isLoggedIn: false })
                 });
             }
             else {

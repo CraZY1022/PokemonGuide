@@ -1,3 +1,5 @@
+import { authService } from '../../services/auth'
+
 Component({
     data: {
         userInfo: null as any,
@@ -10,11 +12,27 @@ Component({
         },
 
         checkLoginStatus() {
+            const token = wx.getStorageSync('token')
             const userInfo = wx.getStorageSync('userInfo')
-            if (userInfo) {
+
+            if (token && userInfo) {
                 this.setData({
                     userInfo: userInfo,
                     isLoggedIn: true
+                })
+
+                // Silent refresh of profile
+                authService.getProfile().then(userProfile => {
+                    const newUserInfo = {
+                        ...userInfo,
+                        ...userProfile
+                    }
+                    wx.setStorageSync('userInfo', newUserInfo)
+                    this.setData({ userInfo: newUserInfo })
+                }).catch(() => {
+                    // Token likely expired
+                    // request.ts handles 401 logout, but here we can just update UI
+                    // this.setData({ isLoggedIn: false })
                 })
             } else {
                 this.setData({

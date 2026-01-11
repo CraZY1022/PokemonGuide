@@ -1,11 +1,13 @@
-import { MOCK_POKEMON_LIST } from '../../models/mock-data'
+import { pokemonService } from '../../services/pokemon'
 import { Pokemon } from '../../models/pokemon'
 
 Component({
     data: {
         pokemonList: [] as Pokemon[],
         loading: false,
-        query: ''
+        query: '',
+        page: 1,
+        hasMore: true
     },
 
     methods: {
@@ -13,40 +15,59 @@ Component({
             this.loadData()
         },
 
-        loadData() {
+        loadData(loadMore: boolean = false) {
+            if (this.data.loading) return
+            if (loadMore && !this.data.hasMore) return
+
             this.setData({ loading: true })
 
-            // Simulate API delay
-            setTimeout(() => {
-                // Simple client-side filtering logic for mock
-                let list = MOCK_POKEMON_LIST
-                if (this.data.query) {
-                    const q = this.data.query.toLowerCase()
-                    list = list.filter(p =>
-                        p.nameZh.includes(q) ||
-                        p.nameEn.toLowerCase().includes(q) ||
-                        p.id.toString().includes(q)
-                    )
-                }
+            const page = loadMore ? this.data.page + 1 : 1
+            const { query } = this.data
 
-                this.setData({
-                    pokemonList: list,
-                    loading: false
+            const params: any = {
+                page: page,
+                limit: 20
+            }
+            if (query) {
+                params.search = query
+            }
+
+            pokemonService.getPokemonList(params)
+                .then(res => {
+                    const newList = res.data.map((item: any) => ({
+                        id: item.id,
+                        nameZh: item.name_zh,
+                        nameEn: item.name_en,
+                        types: item.types,
+                        imageUrl: item.image_normal,
+                        gen: item.gen
+                    }))
+
+                    const { meta } = res
+                    const hasMore = meta.page < meta.totalPages
+
+                    this.setData({
+                        pokemonList: loadMore ? this.data.pokemonList.concat(newList) : newList,
+                        loading: false,
+                        page: page,
+                        hasMore: hasMore
+                    })
+                    wx.stopPullDownRefresh()
                 })
-                wx.stopPullDownRefresh()
-            }, 500)
+                .catch(() => {
+                    this.setData({ loading: false })
+                    wx.stopPullDownRefresh()
+                })
         },
 
         onSearch(e: any) {
             this.setData({ query: e.detail }, () => {
-                this.loadData()
+                this.loadData(false)
             })
         },
 
         onInput(e: any) {
             // Optional: Real-time search or just update query
-            // For now, let's just trigger on 'search' (confirm) or we can debounce here.
-            // The search-bar component triggers 'input' on typing.
         },
 
         onFilter() {
@@ -54,7 +75,11 @@ Component({
         },
 
         onPullDownRefresh() {
-            this.loadData()
+            this.loadData(false)
+        },
+
+        onReachBottom() {
+            this.loadData(true)
         }
     }
 })

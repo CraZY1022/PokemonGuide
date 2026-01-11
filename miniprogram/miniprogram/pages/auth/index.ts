@@ -1,3 +1,5 @@
+import { authService } from '../../services/auth'
+
 Component({
     data: {
         isRegister: false, // false: Login, true: Register
@@ -35,32 +37,47 @@ Component({
 
             this.setData({ loading: true })
 
-            // Mock API Call
-            setTimeout(() => {
+            const action = isRegister
+                ? authService.register({ username, password })
+                : authService.login({ username, password })
+
+            action.then(res => {
                 this.setData({ loading: false })
 
                 if (isRegister) {
-                    wx.showToast({ title: '注册成功，请登录', icon: 'success' })
-                    this.toggleMode()
+                    wx.showToast({ title: '注册成功', icon: 'success' })
+                    // Auto login logic or just toggle to login? 
+                    // Requirement says: "Response (201 Created): Register success auto login, return Token."
+                    // So we treat it as login success
+                    this.handleLoginSuccess(res.access_token, username)
                 } else {
-                    // Mock Login Success
-                    const userInfo = {
-                        username,
-                        avatarUrl: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png', // Pikachu avatar
-                        userId: 1001
-                    }
-
-                    // Store Session
-                    wx.setStorageSync('userInfo', userInfo)
-                    wx.setStorageSync('token', 'mock-token-12345')
-
-                    wx.showToast({ title: '登录成功', icon: 'success' })
-
-                    setTimeout(() => {
-                        wx.navigateBack()
-                    }, 1500)
+                    this.handleLoginSuccess(res.access_token, username)
                 }
-            }, 1000)
+            }).catch(() => {
+                this.setData({ loading: false })
+            })
+        },
+
+        handleLoginSuccess(token: string, username: string) {
+            wx.setStorageSync('token', token)
+            // We don't have full user info yet, store partial or fetch profile
+            // For better UX, let's fetch profile immediately or just store username
+            // Fetch profile to get real userId
+            authService.getProfile().then(userProfile => {
+                wx.setStorageSync('userInfo', {
+                    ...userProfile,
+                    // Mock avatar for now as backend might not return it
+                    avatarUrl: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png'
+                })
+                wx.showToast({ title: '登录成功', icon: 'success' })
+                setTimeout(() => {
+                    wx.navigateBack()
+                }, 1500)
+            }).catch(() => {
+                // Fallback if profile fetch fails
+                wx.setStorageSync('userInfo', { username, avatarUrl: '' })
+                wx.navigateBack()
+            })
         }
     }
 })
