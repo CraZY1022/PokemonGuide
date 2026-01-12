@@ -23,13 +23,13 @@
 ## 📸 界面预览 (Screenshots)
 
 ### v1.0
-| 首页 / 图鉴列表 | 详情页 (普通形态) | 详情页 (闪光形态) |
-| :---: | :---: | :---: |
-| ![Home](docs/v1.0/screenshots/home_page.png) | ![Detail](docs/v1.0/screenshots/detail_page.png) | ![Shiny](docs/v1.0/screenshots/shiny_mode.png) |
+| 首页 / 图鉴列表 | 搜索功能 |
+| :---: | :---: |
+| ![Home](docs/v1.0/screenshots/home_page.png) | ![Search](docs/v1.0/screenshots/search_result.png) |
 
-| 搜索功能 |
-| :---: |
-| ![Search](docs/v1.0/screenshots/search_result.png) |
+| 详情页 (普通形态) | 详情页 (闪光形态) |
+| :---: | :---: |
+| ![Detail](docs/v1.0/screenshots/detail_page.png) | ![Shiny](docs/v1.0/screenshots/shiny_mode.png) |
 
 ## 🛠 技术栈
 *   **前端**：微信小程序原生开发 (WXML, WXSS, JS/TS)
