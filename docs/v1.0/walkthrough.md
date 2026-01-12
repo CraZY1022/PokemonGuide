@@ -47,3 +47,37 @@
     - `home/index.ts`: 完整对接分页 API。
     - `detail/index.ts`: ID 传参获取详情。
     - `auth/index.ts` & `profile/index.ts`: 用户认证流程。
+
+---
+
+## 4. 自动化测试 (Automation Test) - *新增*
+
+我们已使用 `miniprogram-automator` 和 `Jest` 实现了 E2E 自动化测试。
+
+### 4.1 测试范围
+- **首页 (Home)**: 验证列表渲染和搜索功能。
+- **详情页 (Detail)**: 验证从列表到详情页的跳转流程。
+
+### 4.2 如何运行 (推荐：连接模式)
+为了避免重复重启工具和编译卡顿的问题，我们采用 **Connect（连接）** 策略。
+
+1.  **启动微信开发者工具并开启自动化端口**：
+    只需在终端运行一次以下命令来打开项目（并监听 9420 端口）：
+    ```bash
+    /Applications/wechatwebdevtools.app/Contents/MacOS/cli auto --project $(pwd)/miniprogram --auto-port 9420
+    ```
+    *请等待开发者工具完全打开并编译完成。*
+
+2.  **运行测试**：
+    在 `miniprogram` 目录下运行：
+    ```bash
+    cd miniprogram
+    npm run test
+    ```
+
+3.  **结果**：测试脚本将直接连接到已打开的 IDE 窗口，快速执行测试，结束后窗口会保持开启，方便调试。
+
+### 4.3 验证结果
+*   **连接状态**: 成功连接到 `ws://127.0.0.1:9420`。
+*   **执行效率**: 修改为连接模式后，跳过了冷启动和编译过程，测试执行速度显著提升。
+*   **测试通过**: 首页和详情页的核心功能场景均已验证通过。
