@@ -44,7 +44,7 @@
   },
   "compileType": "miniprogram",
   "libVersion": "2.25.0",
-  "appid": "wxd004f0efa29ac44b",
+  "appid": "touristappid",
   "projectname": "pokemon-pokedex",
   "isGameTourist": false,
   "condition": {

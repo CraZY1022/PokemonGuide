@@ -1,5 +1,6 @@
 {
   "setting": {
     "minifyWXML": true
-  }
+  },
+  "appid": "wxd004f0efa29ac44b"
 }

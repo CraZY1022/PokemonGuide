@@ -47,9 +47,14 @@ Component({
             });
         },
         toggleShiny() {
+            const newShinyState = !this.data.isShiny;
             this.setData({
-                isShiny: !this.data.isShiny
+                isShiny: newShinyState
             });
+            // Haptic Feedback for V1.1
+            if (newShinyState) {
+                wx.vibrateShort({ type: 'light' });
+            }
         }
     }
 });

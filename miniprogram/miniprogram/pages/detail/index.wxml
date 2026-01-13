@@ -13,17 +13,26 @@ module.exports.formatId = formatId
 <view class="container" wx:if="{{pokemon}}">
   <!-- Image Section -->
   <view class="hero-section">
-    <image 
-      class="visual-img" 
-      src="{{isShiny ? pokemon.imageShiny : pokemon.imageUrl}}" 
-      mode="aspectFit" 
-    />
+    <!-- Image Stack for Cross-fade -->
+    <view class="image-stack">
+        <!-- Normal Image -->
+        <image 
+            class="visual-img {{isShiny ? 'hidden' : 'visible'}}" 
+            src="{{pokemon.imageUrl}}" 
+            mode="aspectFit" 
+        />
+        <!-- Shiny Image -->
+        <image 
+            class="visual-img {{isShiny ? 'visible' : 'hidden'}}" 
+            src="{{pokemon.imageShiny}}" 
+            mode="aspectFit" 
+        />
+    </view>
     
-    <!-- Shiny Toggle -->
+    <!-- Shiny Toggle Button (V1.1 Style) -->
     <view class="toggle-wrapper" bindtap="toggleShiny">
-      <view class="toggle-btn {{isShiny ? 'active' : ''}}">
-        <text class="shiny-icon">✨</text>
-        <text class="label">{{isShiny ? '闪光' : '普通'}}</text>
+      <view class="toggle-btn {{isShiny ? 'active' : ''}}" hover-class="btn-hover" hover-start-time="0" hover-stay-time="100">
+        <text class="shiny-icon">{{isShiny ? '✨' : '✨'}}</text>
       </view>
     </view>
   </view>

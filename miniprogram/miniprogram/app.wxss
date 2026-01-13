@@ -16,11 +16,32 @@ page {
   --text-body: #666666;          /* 正文 */
   --text-sub: #999999;           /* 辅助信息 */
   
+  /* Pokemon Types (V1.1 High Saturation) */
+  --color-type-normal: #A8A77A;
+  --color-type-fighting: #C22E28;
+  --color-type-flying: #A98FF3;
+  --color-type-poison: #A33EA1;
+  --color-type-ground: #E2BF65;
+  --color-type-rock: #B6A136;
+  --color-type-bug: #A6B91A;
+  --color-type-ghost: #735797;
+  --color-type-steel: #B7B7CE;
+  --color-type-fire: #EE8130;
+  --color-type-water: #6390F0;
+  --color-type-grass: #7AC74C;
+  --color-type-electric: #F7D02C;
+  --color-type-psychic: #F95587;
+  --color-type-ice: #96D9D6;
+  --color-type-dragon: #6F35FC;
+  --color-type-dark: #705746;
+  --color-type-fairy: #D685AD;
+
   /* Layout */
   --spacing-page: 32rpx;
   --spacing-card-gutter: 20rpx;
   --radius-normal: 16rpx;
   --radius-large: 32rpx;
+  --radius-badge: 8rpx;    /* New token per V1.1 */
   
   background-color: var(--color-bg);
   font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica,

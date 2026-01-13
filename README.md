@@ -22,7 +22,7 @@
 
 ## 📸 界面预览 (Screenshots)
 
-### v1.0
+### v1.0（2026.1.11）
 | 首页 / 图鉴列表 | 搜索功能 |
 | :---: | :---: |
 | ![Home](docs/v1.0/screenshots/home_page.png) | ![Search](docs/v1.0/screenshots/search_result.png) |

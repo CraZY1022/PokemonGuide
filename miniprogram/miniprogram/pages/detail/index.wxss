@@ -16,10 +16,28 @@ page {
   background-color: #F5F7FA;
 }
 
-.hero-section .visual-img {
+.hero-section .image-stack {
+  position: relative;
   width: 400rpx;
   height: 400rpx;
   z-index: 1;
+}
+
+.hero-section .visual-img {
+  width: 400rpx;
+  height: 400rpx;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: opacity 0.3s ease-in-out; /* Cross-fade duration */
+}
+
+.hero-section .visual-img.visible {
+  opacity: 1;
+}
+
+.hero-section .visual-img.hidden {
+  opacity: 0;
 }
 
 .hero-section .toggle-wrapper {
@@ -29,36 +47,39 @@ page {
   z-index: 10;
 }
 
+/* V1.1 Shiny Toggle Style */
 .hero-section .toggle-wrapper .toggle-btn {
-  background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(10px);
-  padding: 12rpx 24rpx;
-  border-radius: 32rpx;
+  background: rgba(255, 255, 255, 0.9);
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%; /* Circle */
   display: flex;
   align-items: center;
-  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.05);
-  border: 1px solid rgba(0, 0, 0, 0.02);
-  transition: all 0.3s ease;
+  justify-content: center;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.1);
+  border: 1px solid #EEEEEE;
+  transition: all 0.2s ease;
+}
+
+.hero-section .toggle-wrapper .toggle-btn.btn-hover {
+  transform: scale(0.9);
 }
 
 .hero-section .toggle-wrapper .toggle-btn .shiny-icon {
-  margin-right: 8rpx;
-  font-size: 24rpx;
-}
-
-.hero-section .toggle-wrapper .toggle-btn .label {
-  font-size: 24rpx;
-  font-weight: 600;
-  color: var(--text-main);
+  font-size: 32rpx;
+  color: #999999;
+  line-height: 1;
 }
 
 .hero-section .toggle-wrapper .toggle-btn.active {
-  background: #FFF8E1;
+  background: linear-gradient(135deg, #FFFDE7 0%, #FFFFFF 100%);
   border-color: #F7D02C;
+  box-shadow: 0 0 16rpx rgba(247, 208, 44, 0.4); /* Glow effect */
 }
 
-.hero-section .toggle-wrapper .toggle-btn.active .label {
-  color: #B6A136;
+.hero-section .toggle-wrapper .toggle-btn.active .shiny-icon {
+  color: #F7D02C;
+  text-shadow: 0 0 8rpx rgba(247, 208, 44, 0.6);
 }
 
 .info-card {
